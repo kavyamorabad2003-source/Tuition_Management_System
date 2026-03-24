@@ -35,10 +35,15 @@ Tuition_Management_System/
 - ✅ Created project folder structure: `db/`, `backend/`, `frontend/`
 - ✅ Created `PROJECT_TRACKER.md` to track all finalized decisions
 - ✅ Created skills for each section (`db-setup`, `backend-setup`, `frontend-setup`)
+
+### Step 2 — Initial Implementation (2026-03-24)
+- ✅ Designed and implemented premium landing page with Sign In / Sign Up buttons.
+- ✅ Created `users` table schema in `db/migrations/`.
+- ✅ Set up FastAPI backend architecture with SQLAlchemy models and Pydantic schemas.
+- ✅ Prepared `render.yaml` for backend deployment.
 - **Decisions:**
-  - Frontend will prioritize plain HTML/CSS over framework-specific styling
-  - Three separate deployment targets (Vercel, Render, Neon)
-  - Skills will be created per section for reproducible workflows
+  - Used Inter font and a sleek dark mode for the frontend.
+  - Backend follows a modular architecture (models, schemas, routers).
 
 ---
 
