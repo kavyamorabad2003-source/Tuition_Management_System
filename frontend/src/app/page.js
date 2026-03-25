@@ -1,11 +1,21 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import styles from './page.module.css';
 
 export default function Home() {
   return (
     <main className={styles.main}>
       <header className={styles.header}>
-        <div className={styles.logo}>Tuition<span>Master</span></div>
+        <div className={styles.logo}>
+          <Image 
+            src="/logo.png" 
+            alt="Tuition Flow Logo" 
+            width={32} 
+            height={32} 
+            className={styles.logoIcon}
+          />
+          Tuition<span>Flow</span>
+        </div>
         <nav className={styles.nav}>
           <Link href="/signin" className={styles.loginBtn}>Sign In</Link>
           <Link href="/signup" className={styles.signupBtn}>Get Started</Link>
