@@ -24,7 +24,7 @@ export default function Signup() {
     setLoading(true);
     setMessage(null);
 
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://tuition-management-system-v05o.onrender.com';
 
     try {
       const response = await fetch(`${apiUrl}/auth/signup`, {
