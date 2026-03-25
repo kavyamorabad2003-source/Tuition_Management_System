@@ -121,17 +121,21 @@
 }
 
 .secondaryBtn {
-  background: var(--glass);
-  border: 1px solid var(--glass-border);
+  background: transparent;
+  border: 2px solid var(--secondary);
+  color: var(--secondary);
   padding: 1rem 2rem;
   border-radius: 12px;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 1.1rem;
   transition: all 0.3s;
 }
 
 .secondaryBtn:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--secondary);
+  color: var(--text-main);
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+  transform: translateY(-2px);
 }
 
 .features {
