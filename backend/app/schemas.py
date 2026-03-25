@@ -10,6 +10,15 @@ class UserBase(BaseModel):
 class UserCreate(UserBase):
     password: str
 
+class UserLogin(BaseModel):
+    email: EmailStr
+    password: str
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str
+    user: UserBase
+
 class UserUpdate(BaseModel):
     full_name: Optional[str] = None
     role: Optional[str] = None
