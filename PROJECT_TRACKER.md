@@ -1,6 +1,6 @@
 # 📘 Tuition Management System — Project Document
 
-> **Last Updated:** 2026-03-23
+> **Last Updated:** 2026-03-25
 
 ---
 
@@ -36,14 +36,18 @@ Tuition_Management_System/
 - ✅ Created `PROJECT_TRACKER.md` to track all finalized decisions
 - ✅ Created skills for each section (`db-setup`, `backend-setup`, `frontend-setup`)
 
-### Step 2 — Initial Implementation (2026-03-24)
-- ✅ Designed and implemented premium landing page with Sign In / Sign Up buttons.
-- ✅ Created `users` table schema in `db/migrations/`.
-- ✅ Set up FastAPI backend architecture with SQLAlchemy models and Pydantic schemas.
-- ✅ Prepared `render.yaml` for backend deployment.
+### Step 2 — Initial Implementation & Deployment (2026-03-25)
+- ✅ Designed and implemented premium landing page (Blue themed 'Learn More' button).
+- ✅ Created `users` table schema in `db/migrations/` and migrated to Neon.
+- ✅ Set up FastAPI backend architecture on Render (connected to Neon).
+- ✅ Deployed Next.js frontend on Vercel (linked to Render backend).
+- ✅ Established CI/CD pipeline via GitHub interlinking.
+- **Service URLs:**
+  - **Frontend:** [https://tuition-management-system-woad.vercel.app](https://tuition-management-system-woad.vercel.app)
+  - **Backend:** [https://tuition-management-system-v05o.onrender.com](https://tuition-management-system-v05o.onrender.com)
 - **Decisions:**
-  - Used Inter font and a sleek dark mode for the frontend.
-  - Backend follows a modular architecture (models, schemas, routers).
+  - Used absolute imports for the backend to ensure reliable Render deployments.
+  - Configured glassmorphism and blue-vibrant accents for a premium look.
 
 ---
 
