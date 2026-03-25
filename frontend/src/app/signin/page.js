@@ -42,9 +42,9 @@ export default function Signin() {
         
         setMessage({ type: 'success', text: 'Signed in successfully! Redirecting...' });
         
-        // Redirect to dashboard (placeholder)
+        // Redirect to dashboard
         setTimeout(() => {
-          router.push('/');
+          router.push('/dashboard');
         }, 1500);
       } else {
         setMessage({ type: 'error', text: data.detail || 'Invalid email or password.' });
