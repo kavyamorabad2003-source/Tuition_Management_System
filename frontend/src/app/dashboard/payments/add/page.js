@@ -43,9 +43,19 @@ export default function AddFunds() {
     setProcessing(true);
     // Mock payment processing delay
     setTimeout(() => {
+      const newTx = {
+        id: Date.now(),
+        service: 'Funds Added',
+        date: new Date().toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' }),
+        amount: `+$${parseFloat(amount).toFixed(2)}`,
+        status: 'Paid'
+      };
+      
+      const existingTxs = JSON.parse(localStorage.getItem('transactions') || '[]');
+      localStorage.setItem('transactions', JSON.stringify([newTx, ...existingTxs]));
+
       setProcessing(false);
       setSuccess(true);
-      // In a real app, we would update the balance in the backend here
     }, 2000);
   };
 

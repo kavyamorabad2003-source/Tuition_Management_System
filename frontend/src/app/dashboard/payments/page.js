@@ -11,13 +11,8 @@ export default function Payments() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Mock data for payments
-  const transactions = [
-    { id: 1, service: 'Advanced Mathematics', date: 'Mar 25, 2026', amount: '$150.00', status: 'Paid' },
-    { id: 2, service: 'Physics 101: Mechanics', date: 'Mar 18, 2026', amount: '$120.00', status: 'Paid' },
-    { id: 3, service: 'Introduction to Python', date: 'Mar 10, 2026', amount: '$200.00', status: 'Paid' },
-    { id: 4, service: 'Tutor Subscription - Monthly', date: 'Mar 01, 2026', amount: '$45.00', status: 'Paid' },
-  ];
+  const [transactions, setTransactions] = useState([]);
+  const [balance, setBalance] = useState(0);
 
   useEffect(() => {
     // Check authentication status
@@ -28,6 +23,35 @@ export default function Payments() {
       router.push('/signin');
     } else {
       setUser(JSON.parse(userData));
+      
+      // Load transactions
+      const savedTxs = localStorage.getItem('transactions');
+      let currentTxs = [];
+      if (savedTxs) {
+        currentTxs = JSON.parse(savedTxs);
+      } else {
+        // Initial mock data
+        currentTxs = [
+          { id: 1, service: 'Advanced Mathematics', date: 'Mar 25, 2026', amount: '-$150.00', status: 'Paid' },
+          { id: 2, service: 'Physics 101: Mechanics', date: 'Mar 18, 2026', amount: '-$120.00', status: 'Paid' },
+          { id: 3, service: 'Introduction to Python', date: 'Mar 10, 2026', amount: '-$200.00', status: 'Paid' },
+          { id: 4, service: 'Tutor Subscription - Monthly', date: 'Mar 01, 2026', amount: '-$45.00', status: 'Paid' },
+        ];
+        localStorage.setItem('transactions', JSON.stringify(currentTxs));
+      }
+      setTransactions(currentTxs);
+
+      // Calculate balance
+      const totalBalance = currentTxs.reduce((acc, tx) => {
+        if (tx.service === 'Funds Added') {
+          return acc + parseFloat(tx.amount.replace('+$', ''));
+        } else if (tx.amount.startsWith('-$')) {
+           return acc - parseFloat(tx.amount.replace('-$', ''));
+        }
+        return acc;
+      }, 0);
+      setBalance(totalBalance > 0 ? totalBalance : 0);
+      
       setLoading(false);
     }
   }, [router]);
@@ -97,7 +121,7 @@ export default function Payments() {
           <div className={styles.balanceCard}>
             <div className={styles.balanceInfo}>
               <h3>Account Balance</h3>
-              <p className={styles.amount}>$0.00</p>
+              <p className={styles.amount}>${balance.toFixed(2)}</p>
               <span className={styles.status}>No pending bills</span>
             </div>
             <Link href="/dashboard/payments/add" className={styles.payBtn} style={{ textDecoration: 'none' }}>
