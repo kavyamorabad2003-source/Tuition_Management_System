@@ -63,12 +63,12 @@ export default function Schedule() {
           <Link href="/dashboard/classes" className={styles.navItem} style={{ textDecoration: 'none' }}>
             <span className={styles.navIcon}>📚</span> My Classes
           </Link>
-          <div className={styles.navItem}>
+          <Link href="/dashboard/payments" className={styles.navItem} style={{ textDecoration: 'none' }}>
             <span className={styles.navIcon}>💳</span> Payments
-          </div>
-          <div className={styles.navItem}>
+          </Link>
+          <Link href="/dashboard/settings" className={styles.navItem} style={{ textDecoration: 'none' }}>
             <span className={styles.navIcon}>⚙️</span> Settings
-          </div>
+          </Link>
         </nav>
 
         <div className={styles.sidebarFooter}>

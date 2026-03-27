@@ -6,10 +6,18 @@ import Link from 'next/link';
 import Image from 'next/image';
 import styles from './page.module.css';
 
-export default function Dashboard() {
+export default function Payments() {
   const router = useRouter();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  // Mock data for payments
+  const transactions = [
+    { id: 1, service: 'Advanced Mathematics', date: 'Mar 25, 2026', amount: '$150.00', status: 'Paid' },
+    { id: 2, service: 'Physics 101: Mechanics', date: 'Mar 18, 2026', amount: '$120.00', status: 'Paid' },
+    { id: 3, service: 'Introduction to Python', date: 'Mar 10, 2026', amount: '$200.00', status: 'Paid' },
+    { id: 4, service: 'Tutor Subscription - Monthly', date: 'Mar 01, 2026', amount: '$45.00', status: 'Paid' },
+  ];
 
   useEffect(() => {
     // Check authentication status
@@ -31,7 +39,7 @@ export default function Dashboard() {
   };
 
   if (loading) {
-    return <div className={styles.loader}>Loading Dashboard...</div>;
+    return <div className={styles.loader}>Loading Payments...</div>;
   }
 
   return (
@@ -46,15 +54,15 @@ export default function Dashboard() {
         </div>
         
         <nav className={styles.navLinks}>
-          <Link href="/dashboard" className={styles.navItemActive} style={{ textDecoration: 'none' }}>
+          <Link href="/dashboard" className={styles.navItem} style={{ textDecoration: 'none' }}>
             <span className={styles.navIcon}>📊</span> Dashboard
           </Link>
           <Link href="/dashboard/classes" className={styles.navItem} style={{ textDecoration: 'none' }}>
             <span className={styles.navIcon}>📚</span> My Classes
           </Link>
-          <Link href="/dashboard/payments" className={styles.navItem} style={{ textDecoration: 'none' }}>
+          <div className={styles.navItemActive}>
             <span className={styles.navIcon}>💳</span> Payments
-          </Link>
+          </div>
           <Link href="/dashboard/settings" className={styles.navItem} style={{ textDecoration: 'none' }}>
             <span className={styles.navIcon}>⚙️</span> Settings
           </Link>
@@ -71,8 +79,8 @@ export default function Dashboard() {
       <main className={styles.mainContent}>
         <header className={styles.header}>
           <div className={styles.headerTitle}>
-            <h1>Overview</h1>
-            <p>Welcome to your control center.</p>
+            <h1>Payments</h1>
+            <p>Track your transactions and billing history.</p>
           </div>
           <div className={styles.userProfile}>
             <div className={styles.avatar}>
@@ -85,33 +93,31 @@ export default function Dashboard() {
           </div>
         </header>
 
-        <section className={styles.contentGrid}>
-          {/* Welcome Card */}
-          <div className={`${styles.card} ${styles.welcomeCard}`}>
-            <div className={styles.welcomeText}>
-              <h2>Welcome back, {user.full_name.split(' ')[0]}!</h2>
-              <p>You have 2 upcoming classes this week and 1 pending assignment. Keep up the great work!</p>
-              <Link href="/dashboard/schedule" className={styles.primaryBtn} style={{ textDecoration: 'none' }}>
-                View Schedule
-              </Link>
+        <section className={styles.paymentOverview}>
+          <div className={styles.balanceCard}>
+            <div className={styles.balanceInfo}>
+              <h3>Account Balance</h3>
+              <p className={styles.amount}>$0.00</p>
+              <span className={styles.status}>No pending bills</span>
             </div>
-            <div className={styles.welcomeGraphic}>
-              <div className={styles.floatingCircle1}></div>
-              <div className={styles.floatingCircle2}></div>
-            </div>
+            <button className={styles.payBtn}>Add Funds</button>
           </div>
 
-          {/* Quick Stats */}
-          <div className={styles.statsGrid}>
-            <div className={styles.statCard}>
-              <h3>Classes Attended</h3>
-              <p className={styles.statNumber}>12</p>
-              <span className={styles.statTrend}>+2 this month</span>
-            </div>
-            <div className={styles.statCard}>
-              <h3>Average Score</h3>
-              <p className={styles.statNumber}>94%</p>
-              <span className={styles.statTrend}>Top 10%</span>
+          <div className={styles.transactionSection}>
+            <h2>Recent Transactions</h2>
+            <div className={styles.transactionList}>
+              {transactions.map((tx) => (
+                <div key={tx.id} className={styles.txRow}>
+                  <div className={styles.txInfo}>
+                    <p className={styles.txService}>{tx.service}</p>
+                    <p className={styles.txDate}>{tx.date}</p>
+                  </div>
+                  <div className={styles.txAmount}>
+                    <p>{tx.amount}</p>
+                    <span className={styles.txStatus}>{tx.status}</span>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </section>
