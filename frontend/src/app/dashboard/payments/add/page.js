@@ -11,6 +11,7 @@ export default function AddFunds() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [amount, setAmount] = useState('');
+  const [subject, setSubject] = useState('');
   const [paymentMethod, setPaymentMethod] = useState('card');
   const [processing, setProcessing] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -45,7 +46,7 @@ export default function AddFunds() {
     setTimeout(() => {
       const newTx = {
         id: Date.now(),
-        service: 'Funds Added',
+        service: subject || 'Funds Added',
         date: new Date().toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' }),
         amount: `+$${parseFloat(amount).toFixed(2)}`,
         status: 'Paid'
@@ -80,6 +81,10 @@ export default function AddFunds() {
               <div className={styles.detailItem}>
                 <span>Payment Method</span>
                 <strong>{paymentMethod === 'card' ? 'Credit Card' : 'PayPal'}</strong>
+              </div>
+              <div className={styles.detailItem}>
+                <span>Purpose</span>
+                <strong>{subject || 'General Top-up'}</strong>
               </div>
               <div className={styles.detailItem}>
                 <span>Date</span>
@@ -156,6 +161,17 @@ export default function AddFunds() {
                   value={amount} 
                   onChange={(e) => setAmount(e.target.value)}
                   step="0.01"
+                  required
+                />
+              </div>
+
+              <div className={styles.formGroup}>
+                <label>Subject / Purpose (e.g. Mathematics Tuition)</label>
+                <input 
+                  type="text" 
+                  placeholder="What is this for?" 
+                  value={subject} 
+                  onChange={(e) => setSubject(e.target.value)}
                   required
                 />
               </div>
