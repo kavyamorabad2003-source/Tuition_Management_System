@@ -109,6 +109,25 @@
   position: relative;
 }
 
+.successToast {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  background: #4ade80;
+  color: #000;
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  font-weight: 700;
+  box-shadow: 0 10px 30px rgba(74, 222, 128, 0.3);
+  animation: slideInRight 0.3s ease-out;
+  z-index: 100;
+}
+
+@keyframes slideInRight {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
 .header {
   display: flex;
   justify-content: space-between;
@@ -253,6 +272,32 @@
 .saveBtn:hover {
   background: var(--primary-hover);
   transform: translateY(-2px);
+}
+
+.formActions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.formActions .saveBtn {
+  margin-top: 0;
+  flex: 1;
+}
+
+.cancelBtn {
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+  border: 1px solid var(--glass-border);
+  padding: 1rem;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.cancelBtn:hover {
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .secondaryBtn {

@@ -10,10 +10,17 @@ export default function Settings() {
   const router = useRouter();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [successMessage, setSuccessMessage] = useState('');
+  const [showPasswordForm, setShowPasswordForm] = useState(false);
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
     role: ''
+  });
+  const [passwordData, setPasswordData] = useState({
+    currentPassword: '',
+    newPassword: '',
+    confirmPassword: ''
   });
 
   useEffect(() => {
@@ -44,6 +51,34 @@ export default function Settings() {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handlePasswordChange = (e) => {
+    const { name, value } = e.target;
+    setPasswordData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleSaveProfile = (e) => {
+    e.preventDefault();
+    const updatedUser = { ...user, full_name: formData.fullName };
+    localStorage.setItem('user', JSON.stringify(updatedUser));
+    setUser(updatedUser);
+    
+    setSuccessMessage('Profile updated successfully!');
+    setTimeout(() => setSuccessMessage(''), 3000);
+  };
+
+  const handleSavePassword = (e) => {
+    e.preventDefault();
+    if (passwordData.newPassword !== passwordData.confirmPassword) {
+      alert('New passwords do not match!');
+      return;
+    }
+    
+    setSuccessMessage('Password changed successfully!');
+    setShowPasswordForm(false);
+    setPasswordData({ currentPassword: '', newPassword: '', confirmPassword: '' });
+    setTimeout(() => setSuccessMessage(''), 3000);
   };
 
   if (loading) {
@@ -85,6 +120,12 @@ export default function Settings() {
 
       {/* Main Content Area */}
       <main className={styles.mainContent}>
+        {successMessage && (
+          <div className={styles.successToast}>
+            {successMessage}
+          </div>
+        )}
+        
         <header className={styles.header}>
           <div className={styles.headerTitle}>
             <h1>Settings</h1>
@@ -104,7 +145,7 @@ export default function Settings() {
         <section className={styles.settingsSection}>
           <div className={styles.settingsCard}>
             <h2>Profile Information</h2>
-            <form className={styles.settingsForm}>
+            <form onSubmit={handleSaveProfile} className={styles.settingsForm}>
               <div className={styles.formGroup}>
                 <label>Full Name</label>
                 <input 
@@ -112,6 +153,7 @@ export default function Settings() {
                   name="fullName"
                   value={formData.fullName} 
                   onChange={handleInputChange}
+                  required
                 />
               </div>
               <div className={styles.formGroup}>
@@ -134,14 +176,68 @@ export default function Settings() {
                   className={styles.readOnlyInput}
                 />
               </div>
-              <button type="button" className={styles.saveBtn}>Save Changes</button>
+              <button type="submit" className={styles.saveBtn}>Save Changes</button>
             </form>
           </div>
 
           <div className={styles.settingsCard}>
             <h2>Security</h2>
             <p className={styles.cardDesc}>Update your password and security settings.</p>
-            <button className={styles.secondaryBtn}>Change Password</button>
+            
+            {!showPasswordForm ? (
+              <button 
+                className={styles.secondaryBtn}
+                onClick={() => setShowPasswordForm(true)}
+              >
+                Change Password
+              </button>
+            ) : (
+              <form onSubmit={handleSavePassword} className={styles.settingsForm}>
+                <div className={styles.formGroup}>
+                  <label>Current Password</label>
+                  <input 
+                    type="password" 
+                    name="currentPassword"
+                    value={passwordData.currentPassword}
+                    onChange={handlePasswordChange}
+                    placeholder="••••••••"
+                    required
+                  />
+                </div>
+                <div className={styles.formGroup}>
+                  <label>New Password</label>
+                  <input 
+                    type="password" 
+                    name="newPassword"
+                    value={passwordData.newPassword}
+                    onChange={handlePasswordChange}
+                    placeholder="••••••••"
+                    required
+                  />
+                </div>
+                <div className={styles.formGroup}>
+                  <label>Confirm New Password</label>
+                  <input 
+                    type="password" 
+                    name="confirmPassword"
+                    value={passwordData.confirmPassword}
+                    onChange={handlePasswordChange}
+                    placeholder="••••••••"
+                    required
+                  />
+                </div>
+                <div className={styles.formActions}>
+                  <button type="submit" className={styles.saveBtn}>Update Password</button>
+                  <button 
+                    type="button" 
+                    className={styles.cancelBtn}
+                    onClick={() => setShowPasswordForm(false)}
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </form>
+            )}
           </div>
         </section>
       </main>
