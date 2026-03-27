@@ -60,7 +60,27 @@ export default function AddFunds() {
           <div className={styles.successCard}>
             <div className={styles.successIcon}>✓</div>
             <h1>Payment Successful!</h1>
-            <p>${parseFloat(amount).toFixed(2)} has been added to your account.</p>
+            <p className={styles.successSubtitle}>Your account has been topped up.</p>
+            
+            <div className={styles.detailsGrid}>
+              <div className={styles.detailItem}>
+                <span>Amount Paid</span>
+                <strong>${parseFloat(amount).toFixed(2)}</strong>
+              </div>
+              <div className={styles.detailItem}>
+                <span>Payment Method</span>
+                <strong>{paymentMethod === 'card' ? 'Credit Card' : 'PayPal'}</strong>
+              </div>
+              <div className={styles.detailItem}>
+                <span>Date</span>
+                <strong>{new Date().toLocaleDateString()}</strong>
+              </div>
+              <div className={styles.detailItem}>
+                <span>Transaction ID</span>
+                <strong>#TF-{Math.floor(100000 + Math.random() * 900000)}</strong>
+              </div>
+            </div>
+
             <Link href="/dashboard/payments" className={styles.primaryBtn}>
               Back to Payments
             </Link>

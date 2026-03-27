@@ -321,14 +321,44 @@
 
 .successCard h1 {
   font-size: 2rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
   color: #fff;
 }
 
-.successCard p {
+.successSubtitle {
   color: var(--text-muted);
+  margin-bottom: 2rem;
+}
+
+.detailsGrid {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  padding: 1.5rem;
   margin-bottom: 2.5rem;
-  font-size: 1.1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  text-align: left;
+}
+
+.detailItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.detailItem span {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.detailItem strong {
+  color: #fff;
+  font-size: 1rem;
 }
 
 .primaryBtn {
