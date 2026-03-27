@@ -1,0 +1,359 @@
+.dashboardContainer {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--background);
+  color: var(--text-color);
+  overflow: hidden;
+}
+
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+/* Sidebar Styles */
+.sidebar {
+  width: 280px;
+  background: rgba(10, 10, 10, 0.6);
+  backdrop-filter: blur(20px);
+  border-right: 1px solid var(--glass-border);
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 1.5rem;
+  z-index: 10;
+}
+
+.logoContainer {
+  margin-bottom: 3rem;
+  padding-left: 0.5rem;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: #fff;
+}
+
+.logo span {
+  color: var(--primary);
+}
+
+.navLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.navItem, .navItemActive {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.navItem:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+}
+
+.navItemActive {
+  background: rgba(139, 92, 246, 0.15);
+  color: #fff;
+  border-left: 4px solid var(--primary);
+}
+
+.navIcon {
+  font-size: 1.2rem;
+}
+
+.sidebarFooter {
+  margin-top: auto;
+}
+
+.logoutBtn {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 12px;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  background: rgba(239, 68, 68, 0.1);
+  color: #f87171;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.logoutBtn:hover {
+  background: rgba(239, 68, 68, 0.2);
+}
+
+/* Main Content Styles */
+.mainContent {
+  flex: 1;
+  padding: 2.5rem 3rem;
+  overflow-y: auto;
+  position: relative;
+}
+
+.header {
+  margin-bottom: 3rem;
+}
+
+.breadcrumb {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+}
+
+.breadcrumb a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.headerTitle h1 {
+  font-size: 2.2rem;
+  font-weight: 800;
+  margin-bottom: 0.2rem;
+}
+
+.headerTitle p {
+  color: var(--text-muted);
+}
+
+/* Checkout Section */
+.checkoutSection {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 2.5rem;
+  max-width: 1100px;
+}
+
+.checkoutCard, .summaryCard {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  padding: 2.5rem;
+  border-radius: 24px;
+  backdrop-filter: blur(20px);
+}
+
+.checkoutForm {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.formGroup label {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.formGroup input {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--glass-border);
+  padding: 1.2rem;
+  border-radius: 12px;
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+  transition: all 0.3s;
+}
+
+.formGroup input:focus {
+  outline: none;
+  border-color: var(--primary);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 15px rgba(139, 92, 246, 0.2);
+}
+
+.paymentMethods label {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.methodGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.methodCard {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--glass-border);
+  padding: 1.5rem;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-weight: 600;
+}
+
+.methodCard:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.methodActive {
+  background: rgba(139, 92, 246, 0.1) !important;
+  border-color: var(--primary) !important;
+  color: #fff;
+}
+
+.methodIcon {
+  font-size: 1.5rem;
+}
+
+.confirmBtn {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  padding: 1.2rem;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-top: 1rem;
+}
+
+.confirmBtn:hover:not(:disabled) {
+  background: var(--primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(139, 92, 246, 0.3);
+}
+
+.confirmBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.securityNote {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* Summary Card */
+.summaryCard h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  color: #fff;
+}
+
+.summaryRow {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.2rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.totalRow {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--glass-border);
+  color: #fff;
+  font-size: 1.4rem;
+  font-weight: 800;
+}
+
+/* Success View */
+.successWrapper {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.successCard {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  padding: 4rem;
+  border-radius: 30px;
+  text-align: center;
+  backdrop-filter: blur(20px);
+  max-width: 500px;
+  animation: slideUp 0.5s ease-out;
+}
+
+.successIcon {
+  width: 80px;
+  height: 80px;
+  background: #4ade80;
+  color: #fff;
+  font-size: 3rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 2rem;
+  box-shadow: 0 0 30px rgba(74, 222, 128, 0.4);
+}
+
+.successCard h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #fff;
+}
+
+.successCard p {
+  color: var(--text-muted);
+  margin-bottom: 2.5rem;
+  font-size: 1.1rem;
+}
+
+.primaryBtn {
+  display: inline-block;
+  background: var(--primary);
+  color: #fff;
+  padding: 1rem 2.5rem;
+  border-radius: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.primaryBtn:hover {
+  background: var(--primary-hover);
+  transform: translateY(-2px);
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 900px) {
+  .checkoutSection {
+    grid-template-columns: 1fr;
+  }
+}

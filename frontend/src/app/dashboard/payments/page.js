@@ -100,7 +100,9 @@ export default function Payments() {
               <p className={styles.amount}>$0.00</p>
               <span className={styles.status}>No pending bills</span>
             </div>
-            <button className={styles.payBtn}>Add Funds</button>
+            <Link href="/dashboard/payments/add" className={styles.payBtn} style={{ textDecoration: 'none' }}>
+              Add Funds
+            </Link>
           </div>
 
           <div className={styles.transactionSection}>
