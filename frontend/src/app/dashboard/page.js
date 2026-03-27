@@ -46,9 +46,9 @@ export default function Dashboard() {
         </div>
         
         <nav className={styles.navLinks}>
-          <div className={styles.navItemActive}>
+          <Link href="/dashboard" className={styles.navItemActive} style={{ textDecoration: 'none' }}>
             <span className={styles.navIcon}>📊</span> Dashboard
-          </div>
+          </Link>
           <div className={styles.navItem}>
             <span className={styles.navIcon}>📚</span> My Classes
           </div>
