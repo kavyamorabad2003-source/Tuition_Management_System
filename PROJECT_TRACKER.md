@@ -42,6 +42,8 @@ Tuition_Management_System/
 - ✅ Set up FastAPI backend architecture on Render (connected to Neon).
 - ✅ Deployed Next.js frontend on Vercel (linked to Render backend).
 - ✅ Established CI/CD pipeline via GitHub interlinking.
+- ✅ Implemented Signup and Signin authentication flows using `bcrypt` and `python-jose` (JWT).
+- ✅ Created protected frontend routes including a User Dashboard `\dashboard`.
 - **Service URLs:**
   - **Frontend:** [https://tuition-management-system-woad.vercel.app](https://tuition-management-system-woad.vercel.app)
   - **Backend:** [https://tuition-management-system-v05o.onrender.com](https://tuition-management-system-v05o.onrender.com)
@@ -52,10 +54,8 @@ Tuition_Management_System/
 ---
 
 ## 4. Pending Decisions
-- Database schema design (tables, relationships)
-- Authentication strategy (JWT, OAuth, etc.)
-- API endpoint naming conventions
-- UI/UX design direction
+- Implementation of further Dashboard features (Charts, Payments, Scheduling).
+- Expanded RBAC (Role-Based Access Control) for Student vs Tutor interfaces.
 
 ---
 
@@ -63,8 +63,13 @@ Tuition_Management_System/
 
 ```
 ┌─────────────┐     REST API      ┌──────────────┐     SQL       ┌─────────────┐
-│   Frontend   │ ───────────────▶  │   Backend    │ ───────────▶  │  Database   │
+│   Frontend   │ ──(JSON/JWT)───▶  │   Backend    │ ───────────▶  │  Database   │
 │  (Next.js)   │                   │  (FastAPI)   │               │ (Neon PG)   │
 │   Vercel     │ ◀───────────────  │   Render     │ ◀───────────  │             │
-└─────────────┘     JSON           └──────────────┘    Results    └─────────────┘
+└─────────────┘     Results        └──────────────┘    Data       └─────────────┘
 ```
+
+## 6. Key Learnings & Resolutions
+- **Bcrypt Compatibility**: The newest version of `bcrypt` is incompatible with `passlib` due to the removal of the `__about__` attribute. We explicitly pinned `bcrypt==3.2.2` in `requirements.txt` to prevent 500 Internal Server Errors during password hashing.
+- **Frontend Vercel Environment Variables**: To guarantee immediate API linkage and bypass Vercel env variable propagation delays, we temporarily hardcoded the live Render API URL into the frontend `fetch` calls.
+- **Client-Side Auth State**: Extracted and parsed the JWT token into `localStorage` during sign-in to instantly validate route protection for the `/dashboard`.

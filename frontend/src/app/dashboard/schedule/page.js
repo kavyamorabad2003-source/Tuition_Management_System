@@ -6,10 +6,21 @@ import Link from 'next/link';
 import Image from 'next/image';
 import styles from './page.module.css';
 
-export default function Dashboard() {
+export default function Schedule() {
   const router = useRouter();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  // Mock data for weekly schedule
+  const scheduleData = [
+    { day: 'Monday', classes: [{ title: 'Advanced Mathematics', time: '10:00 AM - 11:30 AM', tutor: 'Prof. Jenkins' }] },
+    { day: 'Tuesday', classes: [{ title: 'Physics 101: Mechanics', time: '02:00 PM - 03:30 PM', tutor: 'Dr. Robert Chen' }] },
+    { day: 'Wednesday', classes: [{ title: 'Advanced Mathematics', time: '10:00 AM - 11:30 AM', tutor: 'Prof. Jenkins' }] },
+    { day: 'Thursday', classes: [{ title: 'Physics 101: Mechanics', time: '02:00 PM - 03:30 PM', tutor: 'Dr. Robert Chen' }] },
+    { day: 'Friday', classes: [{ title: 'Introduction to Python', time: '01:00 PM - 02:30 PM', tutor: 'Emily Stone' }] },
+    { day: 'Saturday', classes: [] },
+    { day: 'Sunday', classes: [] }
+  ];
 
   useEffect(() => {
     // Check authentication status
@@ -31,7 +42,7 @@ export default function Dashboard() {
   };
 
   if (loading) {
-    return <div className={styles.loader}>Loading Dashboard...</div>;
+    return <div className={styles.loader}>Loading Schedule...</div>;
   }
 
   return (
@@ -46,7 +57,7 @@ export default function Dashboard() {
         </div>
         
         <nav className={styles.navLinks}>
-          <Link href="/dashboard" className={styles.navItemActive} style={{ textDecoration: 'none' }}>
+          <Link href="/dashboard" className={styles.navItem} style={{ textDecoration: 'none' }}>
             <span className={styles.navIcon}>📊</span> Dashboard
           </Link>
           <Link href="/dashboard/classes" className={styles.navItem} style={{ textDecoration: 'none' }}>
@@ -71,8 +82,8 @@ export default function Dashboard() {
       <main className={styles.mainContent}>
         <header className={styles.header}>
           <div className={styles.headerTitle}>
-            <h1>Overview</h1>
-            <p>Welcome to your control center.</p>
+            <h1>My Schedule</h1>
+            <p>Your weekly academic overview.</p>
           </div>
           <div className={styles.userProfile}>
             <div className={styles.avatar}>
@@ -85,35 +96,27 @@ export default function Dashboard() {
           </div>
         </header>
 
-        <section className={styles.contentGrid}>
-          {/* Welcome Card */}
-          <div className={`${styles.card} ${styles.welcomeCard}`}>
-            <div className={styles.welcomeText}>
-              <h2>Welcome back, {user.full_name.split(' ')[0]}!</h2>
-              <p>You have 2 upcoming classes this week and 1 pending assignment. Keep up the great work!</p>
-              <Link href="/dashboard/schedule" className={styles.primaryBtn} style={{ textDecoration: 'none' }}>
-                View Schedule
-              </Link>
+        <section className={styles.calendarGrid}>
+          {scheduleData.map((item, index) => (
+            <div key={index} className={styles.dayColumn}>
+              <div className={styles.dayHeader}>
+                <h3>{item.day}</h3>
+              </div>
+              <div className={styles.classSlots}>
+                {item.classes.length > 0 ? (
+                  item.classes.map((cls, idx) => (
+                    <div key={idx} className={styles.scheduleCard}>
+                      <span className={styles.timeTag}>{cls.time}</span>
+                      <h4 className={styles.classTitle}>{cls.title}</h4>
+                      <p className={styles.tutorName}>{cls.tutor}</p>
+                    </div>
+                  ))
+                ) : (
+                  <div className={styles.emptySlot}>No classes</div>
+                )}
+              </div>
             </div>
-            <div className={styles.welcomeGraphic}>
-              <div className={styles.floatingCircle1}></div>
-              <div className={styles.floatingCircle2}></div>
-            </div>
-          </div>
-
-          {/* Quick Stats */}
-          <div className={styles.statsGrid}>
-            <div className={styles.statCard}>
-              <h3>Classes Attended</h3>
-              <p className={styles.statNumber}>12</p>
-              <span className={styles.statTrend}>+2 this month</span>
-            </div>
-            <div className={styles.statCard}>
-              <h3>Average Score</h3>
-              <p className={styles.statNumber}>94%</p>
-              <span className={styles.statTrend}>Top 10%</span>
-            </div>
-          </div>
+          ))}
         </section>
       </main>
     </div>
