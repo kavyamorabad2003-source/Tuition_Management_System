@@ -6,10 +6,17 @@ import Link from 'next/link';
 import Image from 'next/image';
 import styles from './page.module.css';
 
-export default function Dashboard() {
+export default function MyClasses() {
   const router = useRouter();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  // Mock data for classes
+  const mockClasses = [
+    { id: 1, title: 'Advanced Mathematics', tutor: 'Prof. Sarah Jenkins', time: 'Mon, Wed 10:00 AM', status: 'Upcoming', progress: '30%' },
+    { id: 2, title: 'Physics 101: Mechanics', tutor: 'Dr. Robert Chen', time: 'Tue, Thu 2:00 PM', status: 'Active', progress: '65%' },
+    { id: 3, title: 'Introduction to Python', tutor: 'Emily Stone', time: 'Fri 1:00 PM', status: 'Upcoming', progress: '10%' },
+  ];
 
   useEffect(() => {
     // Check authentication status
@@ -31,7 +38,7 @@ export default function Dashboard() {
   };
 
   if (loading) {
-    return <div className={styles.loader}>Loading Dashboard...</div>;
+    return <div className={styles.loader}>Loading Classes...</div>;
   }
 
   return (
@@ -46,12 +53,12 @@ export default function Dashboard() {
         </div>
         
         <nav className={styles.navLinks}>
-          <Link href="/dashboard" className={styles.navItemActive} style={{ textDecoration: 'none' }}>
+          <Link href="/dashboard" className={styles.navItem} style={{ textDecoration: 'none' }}>
             <span className={styles.navIcon}>📊</span> Dashboard
           </Link>
-          <Link href="/dashboard/classes" className={styles.navItem} style={{ textDecoration: 'none' }}>
+          <div className={styles.navItemActive}>
             <span className={styles.navIcon}>📚</span> My Classes
-          </Link>
+          </div>
           <div className={styles.navItem}>
             <span className={styles.navIcon}>💳</span> Payments
           </div>
@@ -71,8 +78,8 @@ export default function Dashboard() {
       <main className={styles.mainContent}>
         <header className={styles.header}>
           <div className={styles.headerTitle}>
-            <h1>Overview</h1>
-            <p>Welcome to your control center.</p>
+            <h1>My Classes</h1>
+            <p>Manage and track your enrolled courses.</p>
           </div>
           <div className={styles.userProfile}>
             <div className={styles.avatar}>
@@ -86,32 +93,41 @@ export default function Dashboard() {
         </header>
 
         <section className={styles.contentGrid}>
-          {/* Welcome Card */}
-          <div className={`${styles.card} ${styles.welcomeCard}`}>
-            <div className={styles.welcomeText}>
-              <h2>Welcome back, {user.full_name.split(' ')[0]}!</h2>
-              <p>You have 2 upcoming classes this week and 1 pending assignment. Keep up the great work!</p>
-              <button className={styles.primaryBtn}>View Schedule</button>
-            </div>
-            <div className={styles.welcomeGraphic}>
-              <div className={styles.floatingCircle1}></div>
-              <div className={styles.floatingCircle2}></div>
-            </div>
-          </div>
+          {mockClasses.map((cls) => (
+            <div key={cls.id} className={styles.classCard}>
+              <div className={styles.cardHeader}>
+                <span className={`${styles.statusBadge} ${cls.status === 'Active' ? styles.statusActive : styles.statusUpcoming}`}>
+                  {cls.status}
+                </span>
+              </div>
+              <h2 className={styles.classTitle}>{cls.title}</h2>
+              
+              <div className={styles.classDetails}>
+                <div className={styles.detailRow}>
+                  <span className={styles.detailIcon}>👨‍🏫</span>
+                  <span className={styles.detailText}>{cls.tutor}</span>
+                </div>
+                <div className={styles.detailRow}>
+                  <span className={styles.detailIcon}>⏰</span>
+                  <span className={styles.detailText}>{cls.time}</span>
+                </div>
+              </div>
 
-          {/* Quick Stats */}
-          <div className={styles.statsGrid}>
-            <div className={styles.statCard}>
-              <h3>Classes Attended</h3>
-              <p className={styles.statNumber}>12</p>
-              <span className={styles.statTrend}>+2 this month</span>
+              <div className={styles.progressSection}>
+                <div className={styles.progressLabel}>
+                  <span>Course Progress</span>
+                  <span>{cls.progress}</span>
+                </div>
+                <div className={styles.progressBar}>
+                  <div className={styles.progressFill} style={{ width: cls.progress }}></div>
+                </div>
+              </div>
+
+              <button className={styles.actionBtn}>
+                {cls.status === 'Active' ? 'Join Class Now' : 'View Materials'}
+              </button>
             </div>
-            <div className={styles.statCard}>
-              <h3>Average Score</h3>
-              <p className={styles.statNumber}>94%</p>
-              <span className={styles.statTrend}>Top 10%</span>
-            </div>
-          </div>
+          ))}
         </section>
       </main>
     </div>
